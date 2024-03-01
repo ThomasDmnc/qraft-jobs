@@ -94,5 +94,32 @@ describe Rental do
         car = Car.new(1, 2000, 10)
         rental = Rental.new(1, 1, '2015-12-8', '2015-12-8', 100)
         rental.compute_all_commissions
+        expect(rental.actions_payment).to eq([
+            {
+              "who": "driver",
+              "type": "debit",
+              "amount": 3000
+            },
+            {
+              "who": "owner",
+              "type": "credit",
+              "amount": 2100
+            },
+            {
+              "who": "insurance",
+              "type": "credit",
+              "amount": 450
+            },
+            {
+              "who": "assistance",
+              "type": "credit",
+              "amount": 100
+            },
+            {
+              "who": "drivy",
+              "type": "credit",
+              "amount": 350
+            }
+          ])
     end
 end
